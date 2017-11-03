@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+const MAX_ROTATION = 30
+const MIN_MOUSE_VECTOR = 5
+
 export var acceleration = 500
 export var friction = 500
 export var max_velocity = 500
@@ -35,5 +38,5 @@ func movement(delta):
 	
 func _input(ev):
 	if ev.type == InputEvent.MOUSE_MOTION:
-		if ev.relative_pos.length() > 4:
-			set_rot(Vector2(0, 0).angle_to_point(ev.relative_pos))
+		if ev.relative_pos.length() > MIN_MOUSE_VECTOR:
+			rotate(clamp(Vector2(0, 0).angle_to_point(ev.relative_pos) - get_rot(), -MAX_ROTATION, MAX_ROTATION))
