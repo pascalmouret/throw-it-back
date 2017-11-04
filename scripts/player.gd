@@ -15,6 +15,7 @@ var remaining_rotation = 0
 
 onready var catcher = get_node("catcher")
 onready var throwable_class = preload("res://scripts/throwable.gd")
+onready var sprite = get_node("sprite")
 
 func _ready():
 	set_process_input(true)
@@ -23,15 +24,14 @@ func _ready():
 func _fixed_process(delta):
 	movement(delta)
 	if has_catch():
-		print("handle")
 		handle_throw(delta)
-	
+
 func movement(delta):
 	var input = Vector2(
 		Input.is_action_pressed("ui_right") - Input.is_action_pressed("ui_left"),
 		Input.is_action_pressed("ui_down") - Input.is_action_pressed("ui_up")
 	)
-	
+
 	if input.length() == 0:
 		if velocity.x > 0:
 			velocity.x -= clamp(friction, 0, velocity.x)
@@ -44,13 +44,23 @@ func movement(delta):
 	else:
 		velocity = (velocity + acceleration * input * delta).clamped(max_velocity)
 	
+	var real_vector = velocity.rotated(get_rot() * -1)
+	if abs(real_vector.length()) > 1:
+		if abs(real_vector.x) > abs(real_vector.y):
+			sprite.play("strafe")
+			sprite.set_flip_h(real_vector.x < 0)
+		else:
+			sprite.play("walk")
+	else:
+		sprite.play("idle")
+
 	var motion = move(velocity)
 	if is_colliding():
 		var normal = get_collision_normal()
 		motion = normal.slide(motion)
 		velocity = normal.slide(motion)
 		move(motion)
-		
+
 func handle_throw(delta):
 	if abs(remaining_rotation) < 0.1:
 		throw()
@@ -59,7 +69,7 @@ func handle_throw(delta):
 		rotate(rot)
 		current_catch.set_pos(THROWABLE_OFFSET.rotated(get_rot()) + get_global_pos())
 		remaining_rotation -= rot
-		
+
 func has_catch():
 	return current_catch != null
 
@@ -70,9 +80,8 @@ func catch(throwable):
 	catch_velocity = current_catch.get_velocity().length()
 	current_catch.set_velocity(Vector2(0, 0))
 	current_catch.set_pos(THROWABLE_OFFSET.rotated(get_rot()) + get_global_pos())
-	
+
 func throw():
-	print(catch_velocity)
 	OS.set_time_scale(1)
 	remaining_rotation = 0
 	current_catch.set_velocity(Vector2(0, catch_velocity).rotated(get_rot()))
@@ -83,7 +92,7 @@ func _input(ev):
 		handle_catch_input(ev)
 	else:
 		handle_default_input(ev)
-		
+
 func handle_default_input(ev):
 	if ev.type == InputEvent.MOUSE_MOTION && ev.relative_pos.length() > MIN_MOUSE_VECTOR:
 		rotate(clamp(
@@ -96,7 +105,7 @@ func handle_default_input(ev):
 			if b extends throwable_class:
 				catch(b)
 				break
-				
+
 func handle_catch_input(ev):
 	if ev.is_action_pressed("ui_accept"):
 		throw()
