@@ -12,3 +12,4 @@ func _on_spawn_throwable(throwable, pos, velocity):
 	add_child(throwable)
 	throwable.set_pos(pos)
 	throwable.set_velocity(velocity)
+	throwable.set_z(1)

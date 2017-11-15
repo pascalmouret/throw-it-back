@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://art/tile.png" type="Texture" id=2]
 [ext_resource path="res://player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://throwing_machine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=4]
 
 [node name="level" type="Node"]
 
@@ -21,11 +21,13 @@ region_rect = Rect2( 0, 0, 1000, 1000 )
 
 transform/pos = Vector2( 572.274, 129.786 )
 transform/rot = -52.3106
+z/z = 100
 
-[node name="throwing_machine" parent="." instance=ExtResource( 4 )]
+[node name="enemy" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 716.273, 16 )
-transform/rot = -51.4221
-throw_offset = Vector2( 0, 64 )
+transform/pos = Vector2( 858.217, 11.4215 )
+acceleration = 100
+friction = 100
+max_velocity = 15
 
 
