@@ -25,7 +25,7 @@ z/z = 100
 
 [node name="enemy" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 858.217, 11.4215 )
+transform/pos = Vector2( 1237.1, -306.573 )
 acceleration = 100
 friction = 100
 max_velocity = 15

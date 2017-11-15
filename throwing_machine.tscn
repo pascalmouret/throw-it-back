@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 48.7223, 48.8323 )
 
-[node name="throwing_machine" type="StaticBody2D"]
+[node name="throwing_machine" type="KinematicBody2D"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -16,10 +16,7 @@ shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
+collision/margin = 0.08
 script/script = ExtResource( 1 )
 throw_offset = Vector2( 0, 0 )
 throw_velocity = 5
@@ -40,8 +37,6 @@ _update_shape_index = 0
 process_mode = 1
 wait_time = 2.0
 one_shot = false
-autostart = true
-
-[connection signal="timeout" from="throw_timer" to="." method="_on_throw_timer_timeout"]
+autostart = false
 
 
