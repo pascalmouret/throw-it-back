@@ -1,6 +1,6 @@
 extends "thrower.gd"
 
-onready var player_class = preload("res://scripts/player.gd")
+onready var player_class = preload("res://scripts/player/player.gd")
 onready var ball = preload("res://ball.tscn")
 
 export var acceleration = 50

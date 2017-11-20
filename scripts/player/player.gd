@@ -102,6 +102,7 @@ func set_throwable_pos():
 func reach():
 	sprite.play(CATCH_ANIMATION)
 	if potential_catch != null:
+		print(potential_catch)
 		sprite.set_flip_h(!is_potential_catch_right)
 
 func catch():
@@ -119,7 +120,6 @@ func catch():
 		sprite.play(IDLE_ANIMATION)
 
 func catch_comes_from_front():
-	print(potential_catch.get_velocity().rotated(get_rot()).y)
 	return potential_catch.get_velocity().rotated(get_rot()).y < 0
 
 func throw():

@@ -22,12 +22,12 @@ region_rect = Rect2( 0, 0, 1000, 1000 )
 transform/pos = Vector2( 572.274, 129.786 )
 transform/rot = -52.3106
 z/z = 100
+acceleration = 200
+friction = 200
+max_velocity = 20
 
 [node name="enemy" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 1237.1, -306.573 )
-acceleration = 100
-friction = 100
-max_velocity = 15
 
 
