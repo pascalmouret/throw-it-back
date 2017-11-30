@@ -12,11 +12,15 @@ func _init(player).(player):
 	pass
 	
 func enter():
+	OS.set_time_scale(0.2)
 	player.current_catch = player.potential_catch
 	catch_velocity = player.current_catch.get_velocity().length()
 	if !player.is_potential_catch_right:
 		direction_multiplier = -1
 	remaining_rotation = remaining_rotation * direction_multiplier
+
+func exit():
+	OS.set_time_scale(1)
 
 func fixed_process(delta):
 	if !player.action_pressed || remaining_rotation < 0.1:

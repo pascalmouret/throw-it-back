@@ -79,16 +79,16 @@ func rotation(ev):
 		))
 
 func _on_catcher_right_area_enter(area):
-	print("right enter")
 	if area extends throwable_class && potential_catch == null:
-		potential_catch = area
-		is_potential_catch_right = true
+		if potential_catch == null || potential_catch.get_global_pos().distance_to(get_global_pos()) > area.get_global_pos().distance_to(get_global_pos()):
+			potential_catch = area
+			is_potential_catch_right = true
 
 func _on_catcher_left_area_enter(area):
-	print("left enter")
 	if area extends throwable_class && potential_catch == null:
-		potential_catch = area
-		is_potential_catch_right = false
+		if potential_catch == null || potential_catch.get_global_pos().distance_to(get_global_pos()) > area.get_global_pos().distance_to(get_global_pos()):
+			potential_catch = area
+			is_potential_catch_right = false
 
 func _on_catcher_right_area_exit(area):
 	if potential_catch == area:
