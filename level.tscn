@@ -21,15 +21,17 @@ parallax = Vector2( 1, 1 )
 transform/pos = Vector2( 572.274, 129.786 )
 transform/rot = -52.3106
 z/z = 100
-acceleration = 200
-friction = 200
+acceleration = 5
+friction = 5
 max_velocity = 20
 
 [node name="enemy" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 1237.1, -306.573 )
-acceleration = 30
-friction = 30
+throw_offset = Vector2( -48, 0 )
+acceleration = 5
+friction = 5
+max_velocity = 15
 min_distance = 1000
 
 

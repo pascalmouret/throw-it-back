@@ -7,10 +7,10 @@
 [ext_resource path="res://art/player/animations/catch/player_catch5.png" type="Texture" id=5]
 [ext_resource path="res://art/player/animations/catch/player_catch1.png" type="Texture" id=6]
 [ext_resource path="res://art/player/animations/catch/player_catch2.png" type="Texture" id=7]
-[ext_resource path="res://art/player/animations/walk/player_walk1.png" type="Texture" id=8]
-[ext_resource path="res://art/player/animations/walk/player_walk2.png" type="Texture" id=9]
-[ext_resource path="res://art/player/animations/walk/player_strafe1.png" type="Texture" id=10]
-[ext_resource path="res://art/player/animations/walk/player_strafe2.png" type="Texture" id=11]
+[ext_resource path="res://art/player/animations/walk/player_strafe1.png" type="Texture" id=8]
+[ext_resource path="res://art/player/animations/walk/player_strafe2.png" type="Texture" id=9]
+[ext_resource path="res://art/player/animations/walk/player_walk1.png" type="Texture" id=10]
+[ext_resource path="res://art/player/animations/walk/player_walk2.png" type="Texture" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -37,17 +37,17 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": true,
 "name": "strafe",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "swing",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "walk",
 "speed": 5.0
 } ]
 

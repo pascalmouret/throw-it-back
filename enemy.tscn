@@ -1,7 +1,13 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
-[ext_resource path="res://art/enemy/enemy.png" type="Texture" id=2]
+[ext_resource path="res://art/enemy/animations/idle/idle.png" type="Texture" id=2]
+[ext_resource path="res://art/enemy/animations/throw/enemy_throw1.png" type="Texture" id=3]
+[ext_resource path="res://art/enemy/animations/throw/enemy_throw2.png" type="Texture" id=4]
+[ext_resource path="res://art/enemy/animations/strafe/enemy_strafe1.png" type="Texture" id=5]
+[ext_resource path="res://art/enemy/animations/strafe/enemy_strafe2.png" type="Texture" id=6]
+[ext_resource path="res://art/enemy/animations/walk/enemy_walk1.png" type="Texture" id=7]
+[ext_resource path="res://art/enemy/animations/walk/enemy_walk2.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -12,6 +18,30 @@ radius = 66.3688
 
 custom_solver_bias = 0.0
 radius = 874.62
+
+[sub_resource type="SpriteFrames" id=3]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "throw",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "strafe",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
 
 [node name="enemy" type="KinematicBody2D"]
 
@@ -25,16 +55,11 @@ collision/margin = 0.08
 script/script = ExtResource( 1 )
 throw_offset = Vector2( 0, 0 )
 throw_velocity = 30
-acceleration = 50
-friction = 50
+acceleration = 20
+friction = 20
 max_velocity = 50
 min_distance = 300
 throw_interval = 2
-
-[node name="Sprite" type="Sprite" parent="."]
-
-transform/scale = Vector2( 4, 4 )
-texture = ExtResource( 2 )
 
 [node name="detector" type="Area2D" parent="."]
 
@@ -59,6 +84,14 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
+[node name="sprite" type="AnimatedSprite" parent="."]
+
+transform/scale = Vector2( 4, 4 )
+frames = SubResource( 3 )
+animation = "idle"
+
 [connection signal="body_enter" from="detector" to="." method="_on_detector_body_enter"]
+
+[connection signal="finished" from="sprite" to="." method="_on_sprite_finished"]
 
 

@@ -99,4 +99,5 @@ func _on_catcher_left_area_exit(area):
 		potential_catch = null
 
 func _on_sprite_finished():
+	sprite.set_flip_h(false)	
 	current_state.animation_done()
