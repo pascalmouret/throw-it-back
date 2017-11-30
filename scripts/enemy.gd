@@ -60,7 +60,6 @@ func start_throw_timer():
 	add_child(timer)
 
 func _on_detector_body_enter(body):
-	print(body)
 	if body extends player_class && player == null:
 		set_process(true)
 		player = body

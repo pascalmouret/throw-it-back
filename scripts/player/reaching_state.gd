@@ -12,9 +12,7 @@ func _init(player).(player):
 func fixed_process(delta):
 	if timer.get_time_left() == 0 || !player.action_pressed:
 		return IdleState.new(player)
-	if player.potential_catch != null:
-		print(player.potential_catch.get_global_pos().distance_to(player.get_global_pos()))
-	if player.potential_catch != null && player.potential_catch.get_global_pos().distance_to(player.get_global_pos()) < 20:
+	if player.potential_catch != null && player.potential_catch.get_global_pos().distance_to(player.get_global_pos()) < 55:
 		return SwingState.new(player)
 
 func enter():

@@ -1,9 +1,12 @@
 extends KinematicBody2D
 
+signal morale_change(new_morale)
+
 onready var IdleState = preload("res://scripts/player/idle_state.gd")
 onready var throwable_class = preload("res://scripts/throwable.gd")
 onready var sprite = get_node("sprite")
 
+export var morale = 100
 export var acceleration = 200
 export var friction = 200
 export var max_velocity = 20
@@ -77,15 +80,19 @@ func rotation(ev):
 			-MAX_ROTATION,
 			MAX_ROTATION
 		))
+		
+func register_hit(damage):
+	morale -= damage
+	emit_signal("morale_change", morale)
 
 func _on_catcher_right_area_enter(area):
-	if area extends throwable_class && potential_catch == null:
+	if area extends throwable_class:
 		if potential_catch == null || potential_catch.get_global_pos().distance_to(get_global_pos()) > area.get_global_pos().distance_to(get_global_pos()):
 			potential_catch = area
 			is_potential_catch_right = true
 
 func _on_catcher_left_area_enter(area):
-	if area extends throwable_class && potential_catch == null:
+	if area extends throwable_class:
 		if potential_catch == null || potential_catch.get_global_pos().distance_to(get_global_pos()) > area.get_global_pos().distance_to(get_global_pos()):
 			potential_catch = area
 			is_potential_catch_right = false
