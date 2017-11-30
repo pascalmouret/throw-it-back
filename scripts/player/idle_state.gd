@@ -7,7 +7,7 @@ func _init(player).(player):
 	pass
 	
 func fixed_process(delta):
-	if (player.action_pressed):
+	if (player.action_pressed && player.action_pressed_changed):
 		return ReachingState.new(player)
 	if (player.movement_vector.length() > 0):
 		return WalkingState.new(player)

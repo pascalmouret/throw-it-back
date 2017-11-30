@@ -12,7 +12,7 @@ func fixed_process(delta):
 	player.movement(player.movement_vector, delta)
 	if player.velocity.length() < IDLE_THRESHOLD:
 		return IdleState.new(player)
-	if (player.action_pressed):
+	if (player.action_pressed && player.action_pressed_changed):
 		return ReachingState.new(player)
 		
 func input(ev):
@@ -21,7 +21,7 @@ func input(ev):
 func play_animation(delta):
 	var real_vector = player.velocity.rotated(player.get_rot() * -1)
 	if abs(real_vector.x) > abs(real_vector.y):
-		player.sprite.play(STRAFE_ANIMATION)
+		player.sprite.set_animation(STRAFE_ANIMATION)
 		player.sprite.set_flip_h(real_vector.x < 0)
 	else:
-		player.sprite.play(WALK_ANIMATION)
+		player.sprite.set_animation(WALK_ANIMATION)

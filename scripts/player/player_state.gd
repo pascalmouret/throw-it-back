@@ -19,8 +19,14 @@ func exit():
 func fixed_process(delta):
 	pass
 
-func input(ev, delta):
+func input(ev):
 	pass
 	
 func play_animation(delta):
+	pass
+	
+func animation_done():
+	pass
+
+func draw():
 	pass

@@ -13,8 +13,6 @@ var player = null
 var velocity = Vector2(0, 0)
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
 	pass
 
 func _process(delta):
@@ -42,6 +40,7 @@ func start_throw_timer():
 	add_child(timer)
 
 func _on_detector_body_enter(body):
+	print(body)
 	if body extends player_class && player == null:
 		set_process(true)
 		player = body
