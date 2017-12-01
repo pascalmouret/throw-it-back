@@ -35,11 +35,7 @@ func _fixed_process(delta):
 	update()
 	set_action_pressed_status()
 	movement_vector = get_input_vector()
-	var new_state = current_state.fixed_process(delta)
-	if new_state != null && new_state != current_state:
-		current_state.exit()
-		current_state = new_state
-		current_state.enter()
+	change_state(current_state.fixed_process(delta))
 	current_state.play_animation(delta)
 	
 func _input(event):
@@ -47,6 +43,12 @@ func _input(event):
 
 func _draw():
 	current_state.draw()
+	
+func change_state(new):
+	if new != null && new != current_state:
+		current_state.exit()
+		current_state = new
+		current_state.enter()
 	
 func get_input_vector():
 	return Vector2(
@@ -81,8 +83,11 @@ func rotation(ev):
 			MAX_ROTATION
 		))
 		
-func register_hit(damage):
-	morale -= damage
+func register_hit(throwable):
+	change_state(current_state.on_hit(throwable))
+
+func change_morale(change):
+	morale += change
 	emit_signal("morale_change", morale)
 
 func _on_catcher_right_area_enter(area):
@@ -106,5 +111,4 @@ func _on_catcher_left_area_exit(area):
 		potential_catch = null
 
 func _on_sprite_finished():
-	sprite.set_flip_h(false)	
-	current_state.animation_done()
+	change_state(current_state.animation_done())

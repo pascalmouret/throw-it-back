@@ -25,3 +25,6 @@ func play_animation(delta):
 		player.sprite.set_flip_h(real_vector.x < 0)
 	else:
 		player.sprite.set_animation(WALK_ANIMATION)
+
+func animation_done():
+	player.sprite.set_flip_h(false)

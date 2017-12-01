@@ -20,7 +20,4 @@ func get_velocity():
 
 func _on_ball_body_enter(body):
 	if body extends player_class && body.current_catch != self:
-		print("hi")
-		print(body.current_catch)
-		body.register_hit(damage)
-		queue_free()
+		body.register_hit(self)

@@ -12,7 +12,7 @@ func _init(player).(player):
 func fixed_process(delta):
 	if timer.get_time_left() == 0 || !player.action_pressed:
 		return IdleState.new(player)
-	if player.potential_catch != null && player.potential_catch.get_global_pos().distance_to(player.get_global_pos()) < 55:
+	if player.potential_catch != null && player.potential_catch.get_global_pos().distance_to(player.get_global_pos()) < 50:
 		return SwingState.new(player)
 
 func enter():
@@ -29,3 +29,9 @@ func animation_done():
 		
 func exit():
 	player.remove_child(timer)
+
+func on_hit(throwable):
+	if throwable != player.potential_catch:
+		player.change_morale(-throwable.damage)
+		throwable.queue_free()
+		return IdleState.new(player)

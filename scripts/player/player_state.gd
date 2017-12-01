@@ -30,3 +30,7 @@ func animation_done():
 
 func draw():
 	pass
+
+func on_hit(throwable):
+	player.change_morale(-throwable.damage)
+	throwable.queue_free()
