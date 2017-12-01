@@ -11,9 +11,6 @@ func enter():
 	player.current_catch.set_velocity(escape_vector)
 	player.current_catch.rethrown = true
 
-func fixed_process(delta):
-	pass
-
 func play_animation(delta):
 	player.sprite.set_animation(THROW_ANIMATION)
 

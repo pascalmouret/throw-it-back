@@ -55,6 +55,7 @@ collision/margin = 0.08
 script/script = ExtResource( 1 )
 throw_offset = Vector2( 0, 0 )
 throw_velocity = 30
+value = 10
 acceleration = 20
 friction = 20
 max_velocity = 50

@@ -14,8 +14,17 @@ func _ready():
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	for c in get_children():
 		if c extends thrower_class:
-			c.connect("spawn_throwable", self, "_on_spawn_throwable")
+			connect_thrower(c)
 	player.connect("morale_change", self, "_on_morale_change")
+
+func connect_thrower(thrower):
+	thrower.connect("spawn_throwable", self, "_on_spawn_throwable")
+	thrower.connect("killed", self, "_on_killed")
+
+func reset():
+	player.morale = start_morale
+	score = 0
+	_ready()
 	
 func _on_spawn_throwable(throwable, pos, velocity):
 	add_child(throwable)
@@ -28,7 +37,7 @@ func _on_morale_change(new):
 	if new <= 0:
 		reset()
 
-func reset():
-	player.morale = start_morale
-	score = 0
-	_ready()
+func _on_killed(thrower):
+	score += thrower.value
+	thrower.queue_free()
+	ui.set_score(score)

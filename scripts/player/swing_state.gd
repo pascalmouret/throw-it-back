@@ -13,8 +13,7 @@ func _init(player).(player):
 	pass
 	
 func enter():
-	print("swing")
-	OS.set_time_scale(0.2)
+	OS.set_time_scale(0.05)
 	player.current_catch = player.potential_catch
 	catch_velocity = player.current_catch.get_velocity().length()
 	if !player.is_potential_catch_right:
