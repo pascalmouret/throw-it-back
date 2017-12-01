@@ -9,10 +9,10 @@ const WALK_ANIMATION = "walk"
 const STRAFE_ANIMATION = "strafe"
 const THROW_ANIMATION = "throw"
 
-export var acceleration = 50
-export var friction = 50
-export var max_velocity = 50
-export var min_distance = 300
+export var acceleration = 5
+export var friction = 5
+export var max_velocity = 15
+export var min_distance = 1000
 export var throw_interval = 2
 
 var player = null
