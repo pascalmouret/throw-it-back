@@ -14,7 +14,7 @@ export var friction = 5
 export var max_velocity = 15
 export var min_distance = 1000
 export var throw_interval_min = 1
-export var throw_interval_max = 10
+export var throw_interval_max = 5
 
 var player = null
 var velocity = Vector2(0, 0)
@@ -55,17 +55,16 @@ func animate():
 	
 func start_throw_timer():
 	var timer = Timer.new()
-	timer.connect("timeout", self, "_on_throw_timer_timeout")
 	timer.set_wait_time(rand_range(throw_interval_min, throw_interval_max))
-	timer.start()
+	timer.connect("timeout", self, "_on_throw_timer_timeout")
 	add_child(timer)
+	timer.start()
 
 func _on_detector_body_enter(body):
 	if body extends player_class && player == null:
 		set_process(true)
 		player = body
 		rotate_towards_player()
-		throw(ball)
 		start_throw_timer()
 
 func _on_throw_timer_timeout():

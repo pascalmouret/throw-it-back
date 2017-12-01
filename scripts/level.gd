@@ -11,7 +11,7 @@ var score = 0
 var start_morale = 0
 
 var enemy_count = 0
-var start_enemies = 2
+var start_enemies = 1
 var inrease_after = 5
 var killed = 0
 
@@ -21,7 +21,7 @@ func _ready():
 	start_morale = player.morale
 	ui.set_score(score)
 	ui.set_morale(start_morale)
-	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	spawn_enemies()
 	player.connect("morale_change", self, "_on_morale_change")
 
@@ -38,7 +38,6 @@ func spawn_enemies():
 func add_enemy(enemy):
 	var landingsite = get_random_position()
 	if !is_landingsite_free(landingsite, enemy.get_node("collider").get_shape()):
-		return
 		add_enemy(enemy)
 	enemy.set_global_pos(landingsite)
 	add_child(enemy)
@@ -60,9 +59,8 @@ func is_landingsite_free(pos, shape):
 	params.set_shape(shape)
 
 	var result = state.intersect_shape(params)
-	for r in result:
-		if r.get_name() != "collider":
-			return false
+	if result.size() > 0:
+		return false
 	return true
 
 func reset():

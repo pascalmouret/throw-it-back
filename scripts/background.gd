@@ -53,6 +53,7 @@ func _update_position():
     var floored_parallax_pos = tsize * Vector2(floor(tiled_pos.x), floor(tiled_pos.y))
 
     var new_pos = cam_pos + (parallax_pos - floored_parallax_pos)
+    new_pos.x -= tsize.x
 
     set_pos(new_pos)
 
@@ -69,7 +70,7 @@ func _calculate_required_tiles():
     var tile_size = texture.get_size() * get_scale()
     var view_size = get_viewport_rect().size / get_canvas_transform().get_scale()
     var fn = view_size / tile_size
-    return Vector2(ceil(fn.x), ceil(fn.y))
+    return Vector2(ceil(fn.x) + 1, ceil(fn.y))
 
 
 func _draw():

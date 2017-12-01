@@ -13,13 +13,10 @@ func enter():
 
 func play_animation(delta):
 	player.sprite.set_animation(THROW_ANIMATION)
+	player.sprite.set_flip_h(!player.is_catch_right)
 
 func animation_done():
-	var direction_multiplier = 1
-	if !player.is_potential_catch_right:
-		direction_multiplier = -1
-	player.rotate(PI * direction_multiplier)
-	player.current_catch = null	
+	player.current_catch = null
 	return IdleState.new(player)
 	
 func on_hit(throwable):

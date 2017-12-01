@@ -20,13 +20,16 @@ func enter():
 	timer.set_one_shot(true)
 	player.add_child(timer)
 	timer.start()
+	
+func play_animation(delta):
 	player.sprite.set_animation(CATCH_ANIMATION)
 	player.sprite.set_flip_h(!player.is_potential_catch_right)
 
 func animation_done():
 	if player.sprite.get_animation() == CATCH_ANIMATION:
 		player.sprite.set_animation(SWING_ANIMATION)
-		
+		player.sprite.set_flip_h(!player.is_potential_catch_right)
+
 func exit():
 	player.remove_child(timer)
 

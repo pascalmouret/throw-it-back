@@ -17,6 +17,7 @@ const MIN_MOUSE_VECTOR = 5
 var current_state = null
 var velocity = Vector2(0, 0)
 
+var is_catch_right = true
 var current_catch = null
 var potential_catch = null
 var is_potential_catch_right = false
@@ -111,4 +112,5 @@ func _on_catcher_left_area_exit(area):
 		potential_catch = null
 
 func _on_sprite_finished():
+	sprite.set_flip_h(false)
 	change_state(current_state.animation_done())
