@@ -13,7 +13,8 @@ export var acceleration = 5
 export var friction = 5
 export var max_velocity = 15
 export var min_distance = 1000
-export var throw_interval = 2
+export var throw_interval_min = 1
+export var throw_interval_max = 10
 
 var player = null
 var velocity = Vector2(0, 0)
@@ -55,7 +56,7 @@ func animate():
 func start_throw_timer():
 	var timer = Timer.new()
 	timer.connect("timeout", self, "_on_throw_timer_timeout")
-	timer.set_wait_time(throw_interval)
+	timer.set_wait_time(rand_range(throw_interval_min, throw_interval_max))
 	timer.start()
 	add_child(timer)
 

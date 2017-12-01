@@ -3,6 +3,7 @@ extends Node
 export var default_enemy = preload("res://enemy.tscn")
 
 onready var thrower_class = preload("res://scripts/thrower.gd")
+onready var throwable_class = preload("res://scripts/throwable.gd")
 onready var ui = get_node("ui_layer")
 onready var player = get_node("player")
 
@@ -10,11 +11,11 @@ var score = 0
 var start_morale = 0
 
 var enemy_count = 0
-var start_enemies = 5
+var start_enemies = 2
 var inrease_after = 5
 var killed = 0
 
-var spawn_circle = 2000
+var spawn_circle = 1500
 
 func _ready():
 	start_morale = player.morale
@@ -31,7 +32,6 @@ func connect_thrower(thrower):
 func spawn_enemies():
 	var target = start_enemies + floor(killed / 5)
 	if enemy_count < target:
-		print("spawn")
 		add_enemy(default_enemy.instance())
 		spawn_enemies()
 	
@@ -61,7 +61,6 @@ func is_landingsite_free(pos, shape):
 
 	var result = state.intersect_shape(params)
 	for r in result:
-		print(r.get_name())
 		if r.get_name() != "collider":
 			return false
 	return true
@@ -72,7 +71,7 @@ func reset():
 	killed = 0
 	enemy_count = 0
 	for c in get_children():
-		if c extends thrower_class:
+		if c extends thrower_class || c extends throwable_class:
 			c.queue_free()
 	_ready()
 	

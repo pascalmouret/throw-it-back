@@ -60,7 +60,8 @@ acceleration = 20
 friction = 20
 max_velocity = 15
 min_distance = 1000
-throw_interval = 2
+throw_interval_min = 1
+throw_interval_max = 10
 
 [node name="detector" type="Area2D" parent="."]
 

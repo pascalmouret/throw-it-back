@@ -16,8 +16,6 @@ func throw(throwable_scene):
 	)
 
 func register_hit(throwable):
-	print("hit")
 	if throwable.rethrown:
-		print("HIT")
 		emit_signal("killed", self)
 		throwable.queue_free()
